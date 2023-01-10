@@ -8,7 +8,7 @@ const MusicItems = (props) => {
     <div className={classes.div}>
       <h2>{props.item.title}</h2>
       <img src={props.item.imageUrl} alt="Music Album" />
-      <span>${props.item.price}</span>
+      <span>₹{props.item.price}</span>
       <Button title="ADD TO CART" />
     </div>
   );
