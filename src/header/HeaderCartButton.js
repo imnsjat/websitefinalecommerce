@@ -18,6 +18,10 @@ const HeaderCartButton = () => {
   const cartItemHandler = () => {
     setShowCartItem(true);
   };
+
+  const hideCartItemHandler = () => {
+    setShowCartItem(false);
+  };
   return (
     <>
       <button className={classes.button} onClick={cartItemHandler}>
@@ -28,6 +32,7 @@ const HeaderCartButton = () => {
         <span className={classes.badge}>{cartQuantity}</span>
       </button>
       {showCartItem && <Cart />}
+      {showCartItem && <Cart onClick={hideCartItemHandler} />}
     </>
   );
 };

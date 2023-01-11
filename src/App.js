@@ -1,7 +1,11 @@
 import React from "react";
 import Header from "./header/Header";
-import Section from "./section/Section";
+
 import Footer from "./footer/Footer";
+import { Redirect, Route } from "react-router-dom";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import Store from "./pages/Store";
 
 function App() {
   const productsArr = [
@@ -37,7 +41,19 @@ function App() {
   return (
     <React.Fragment>
       <Header />
-      <Section productList={productsArr} />
+      <Route path="">
+        <Redirect to="/home" />
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/store">
+        <Store productList={productsArr} />
+      </Route>
+      <Route path="/about">
+        <About />
+      </Route>
+      {/* <Section productList={productsArr} /> */}
       <Footer />
     </React.Fragment>
   );
