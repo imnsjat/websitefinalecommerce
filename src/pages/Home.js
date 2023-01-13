@@ -18,7 +18,7 @@ const Home = () => {
   ));
 
   return (
-    <section>
+    <section className={classes.section}>
       <div className={classes.div}>
         <h1>The Generics</h1>
         <button>Get Our Latest Album</button>
