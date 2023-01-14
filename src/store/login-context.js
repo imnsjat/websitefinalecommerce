@@ -12,9 +12,6 @@ export const LoginContextProvider = (props) => {
   const [token, setToken] = useState(storedToken);
   const isloggedIn = token ? true : false;
 
-  console.log(storedToken);
-  console.log(isloggedIn);
-
   const login = (token) => {
     setToken(token);
   };
