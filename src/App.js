@@ -10,6 +10,8 @@ import ContactUs from "./pages/ContactUs";
 import { ShowCartContextProvider } from "./store/showCart-context";
 import { ProductContextProvider } from "./store/product-context";
 import ProductDetail from "./pages/ProductDetail";
+import { CartContextProvider } from "./store/cart-Context";
+import Login from "./pages/Login";
 
 function App() {
   const productsArr = [
@@ -44,10 +46,6 @@ function App() {
 
   return (
     <React.Fragment>
-      <ShowCartContextProvider>
-        <Header />
-      </ShowCartContextProvider>
-
       <Route path="/" exact>
         <Redirect to="/home" />
       </Route>
@@ -58,17 +56,24 @@ function App() {
 
       <Switch>
         <ProductContextProvider>
-          <ShowCartContextProvider>
-            <Route path="/store" exact>
-              <Store productList={productsArr} />
-            </Route>
-          </ShowCartContextProvider>
+          <CartContextProvider>
+            <ShowCartContextProvider>
+              <Header />
+              <Route path="/store" exact>
+                <Store productList={productsArr} />
+              </Route>
+            </ShowCartContextProvider>
+          </CartContextProvider>
 
           <Route path="/store/:productId">
             <ProductDetail />
           </Route>
         </ProductContextProvider>
       </Switch>
+
+      <Route path="/login">
+        <Login />
+      </Route>
 
       <Route path="/about">
         <About />
