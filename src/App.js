@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "./header/Header";
 
 import Footer from "./footer/Footer";
@@ -10,12 +10,25 @@ import ContactUs from "./pages/ContactUs";
 import { ShowCartContextProvider } from "./store/showCart-context";
 import { ProductContextProvider } from "./store/product-context";
 import ProductDetail from "./pages/ProductDetail";
-import { CartContextProvider } from "./store/cart-Context";
+
 import Login from "./pages/Login";
 import loginContext from "./store/login-context";
+import cartContext from "./store/cart-Context";
 
 function App() {
   const loginCtx = useContext(loginContext);
+  const cartCtx = useContext(cartContext);
+
+  const { loginCartHandler } = cartCtx;
+  const { isloggedIn } = loginCtx;
+
+  useEffect(() => {
+    if (isloggedIn) {
+      console.log("called");
+      loginCartHandler();
+    }
+  }, [loginCartHandler, isloggedIn]);
+
   const productsArr = [
     {
       title: "Colors",
@@ -48,6 +61,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <ShowCartContextProvider>
+        <Header />
+      </ShowCartContextProvider>
       <Route path="/" exact>
         <Redirect to="/home" />
       </Route>
@@ -58,26 +74,19 @@ function App() {
 
       <Switch>
         <ProductContextProvider>
-          <CartContextProvider>
-            <ShowCartContextProvider>
-              <Header />
-              <Route path="/product" exact>
-                {loginCtx.isloggedIn && <Store productList={productsArr} />}
-                {!loginCtx.isloggedIn && <Redirect to="/login" />}
-              </Route>
-            </ShowCartContextProvider>
-          </CartContextProvider>
+          <ShowCartContextProvider>
+            <Route path="/product" exact>
+              {loginCtx.isloggedIn && <Store productList={productsArr} />}
+              {!loginCtx.isloggedIn && <Redirect to="/login" />}
+            </Route>
+          </ShowCartContextProvider>
 
           <Route path="/product/:productId">
-            <ProductDetail />
+            {loginCtx.isloggedIn && <ProductDetail />}
+            {!loginCtx.isloggedIn && <Redirect to="/login" />}
           </Route>
         </ProductContextProvider>
       </Switch>
-
-      <Route path="/login">
-        {!loginCtx.isloggedIn && <Login />}
-        {loginCtx.isloggedIn && <Redirect to="/home" />}
-      </Route>
 
       <Route path="/about">
         <About />
@@ -87,8 +96,12 @@ function App() {
         <ContactUs />
       </Route>
 
-      <Route path="*">
+      {/* <Route path="*">
         <Redirect to="/home" />
+      </Route> */}
+      <Route path="/login">
+        {!loginCtx.isloggedIn && <Login />}
+        {loginCtx.isloggedIn && <Redirect to="/home" />}
       </Route>
       {/* <Section productList={productsArr} /> */}
       <Footer />

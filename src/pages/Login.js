@@ -6,8 +6,8 @@ import loginContext from "../store/login-context";
 
 const Login = () => {
   const [loginAccount, setCreateAccount] = useState(true);
-  const loginCtx = useContext(loginContext);
   const history = useHistory();
+  const loginCtx = useContext(loginContext);
   const email = useRef();
   const password = useRef();
 
@@ -42,11 +42,11 @@ const Login = () => {
       });
 
       if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem("tokenId", data.idToken);
-        loginCtx.login(data.idToken);
-        // console.log(data);
         history.replace("/product");
+        const data = await res.json();
+        const convertedData = JSON.stringify(data);
+        localStorage.setItem("tokenId", convertedData);
+        loginCtx.login(data);
       } else {
         const data = await res.json();
         throw new Error(data.error.message);
