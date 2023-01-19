@@ -42,6 +42,7 @@ const Login = () => {
       });
 
       if (res.ok) {
+        console.log(history);
         history.replace("/product");
         const data = await res.json();
         const convertedData = JSON.stringify(data);

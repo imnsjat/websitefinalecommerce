@@ -24,7 +24,7 @@ const CartItem = (props) => {
     if (updatedItem[cartItemIndex].quantity === 1) {
       try {
         await fetch(
-          `https://crudcrud.com/api/9404e861f97341b2bc8e0b5ae7bca9b1/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
+          `https://crudcrud.com/api/aa526dbd8a71441a861aba12fbfc2a1d/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
           {
             method: "DELETE",
           }
@@ -41,7 +41,7 @@ const CartItem = (props) => {
     } else {
       try {
         await fetch(
-          `https://crudcrud.com/api/9404e861f97341b2bc8e0b5ae7bca9b1/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
+          `https://crudcrud.com/api/aa526dbd8a71441a861aba12fbfc2a1d/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
           {
             method: "PUT",
             body: JSON.stringify({

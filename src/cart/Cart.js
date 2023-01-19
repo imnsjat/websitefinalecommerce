@@ -30,7 +30,7 @@ const Cart = (props) => {
     cartCtx.item.forEach(async (item) => {
       try {
         await fetch(
-          `https://crudcrud.com/api/9404e861f97341b2bc8e0b5ae7bca9b1/cartItem${userEmail}/${item._id}`
+          `https://crudcrud.com/api/aa526dbd8a71441a861aba12fbfc2a1d/cartItem${userEmail}/${item._id}`
         );
       } catch (err) {
         console.log(err.message);
