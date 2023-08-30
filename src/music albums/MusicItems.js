@@ -34,7 +34,7 @@ const MusicItems = (props) => {
     if (cartItemIndex === -1) {
       try {
         const res = await fetch(
-          `https://crudcrud.com/api/aa526dbd8a71441a861aba12fbfc2a1d/cartItem${userEmail}`,
+          `https://crudcrud.com/api/ede8527575df4dbd982cb7e0602ae460/cartItem${userEmail}`,
           {
             method: "POST",
             body: JSON.stringify({
@@ -59,7 +59,7 @@ const MusicItems = (props) => {
       const newQuantity = (updatedItem[cartItemIndex].quantity += 1);
       try {
         await fetch(
-          `https://crudcrud.com/api/dfa1ef46022345b4be6f2acf721213ad/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
+          `https://crudcrud.com/api/ede8527575df4dbd982cb7e0602ae460/cartItem${userEmail}/${updatedItem[cartItemIndex]._id}`,
           {
             method: "PUT",
             body: JSON.stringify({
